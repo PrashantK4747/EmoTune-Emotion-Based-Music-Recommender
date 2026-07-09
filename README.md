@@ -9,22 +9,6 @@ Face / Emotion  --->  FastAPI backend  --->  Keras CNN model  --->  Jamendo API 
    (frontend)          (JWT-protected)        (emotion label)                        (frontend player)
 ```
 
-## What changed in this pass
-
-- **Security**: all secrets (JWT signing key, DB password, Jamendo client ID, CORS
-  origins) moved out of source code and into a git-ignored `backend/.env` file.
-- **Auth actually enforced**: `/emotion/detect` and `/music/recommend` now require a
-  valid Bearer token (previously anyone could call them without logging in).
-- **Reliability**: the ML model/cascade paths no longer depend on your terminal's
-  working directory; the database layer creates its own table automatically on
-  startup; Jamendo/network failures are caught and logged instead of crashing routes.
-- **UX**: a single persistent **bottom music player** (play/pause, seek bar, track
-  info) replaces the old per-song `<audio>` tags scattered around the page; blocking
-  `alert()` popups were replaced with non-blocking toast notifications; session
-  expiry now prompts a clean re-login instead of a silent failure.
-- **Dev experience**: ready-to-use VS Code debug config, `.gitignore`, and a
-  `.env.example` template.
-
 ## Project structure
 
 ```
